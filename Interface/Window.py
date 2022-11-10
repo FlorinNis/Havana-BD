@@ -1,13 +1,14 @@
 from tkinter import *
-from functools import partial
 from tkinter import messagebox
 
 window = Tk()
 
 def startWindow():
     window.title("Havana Bar")
-    window.configure(width=500, height=500)
+    window.geometry("500x500")
+    #window.configure(width=500, height=500)
     window.configure(bg='lightgrey')
+    T = Text(window, bg='lightgrey', height=5, width=5)
 
     login()
     window.mainloop()
@@ -25,17 +26,25 @@ def validateLogin(username, password):
     return
 
 def login():
+    havana = Label(window, text="Havana Bar Login", font='Arial 17 bold')
+    havana.place(x=150, y=100)
+
     #username
-    usernameLabel = Label(window, text="User Name").grid(row = 0, column = 0)
+    usernameLabel = Label(window, text="User Name")
+    usernameLabel.place(x=120, y=200)
     username = StringVar()
-    usernameEntry = Entry(window, textvariable=username).grid(row=0, column =1)
+    usernameEntry = Entry(window, textvariable=username)
+    usernameEntry.place(x=200, y=200);
 
     #password
-    passwordLabel = Label(window, text="Password").grid(row=1, column=0)
+    passwordLabel = Label(window, text="Password")
+    passwordLabel.place(x=120, y=230)
     password = StringVar()
-    passwordEntry = Entry(window, textvariable=password, show='*').grid(row=1, column=1)
+    passwordEntry = Entry(window, textvariable=password, show='*')
+    passwordEntry.place(x=200, y=230)
 
     #validateLogin = partial(validateLogin, username, password)
 
     #loginButon
-    loginButton = Button(window, text="Login", command=lambda: validateLogin(username, password)).grid(row=4, column=0)
+    loginButton = Button(window, text="Login", command=lambda: validateLogin(username, password))
+    loginButton.place(x=240, y=260)
