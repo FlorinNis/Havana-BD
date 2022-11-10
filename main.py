@@ -1,4 +1,4 @@
 from Interface.Window import *
 
-startWindow()
+loginWindow()
 

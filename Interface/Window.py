@@ -2,16 +2,31 @@ from tkinter import *
 from tkinter import messagebox
 
 window = Tk()
+newWindow = Tk()
+newWindow.withdraw()
 
-def startWindow():
+def loginWindow():
     window.title("Havana Bar")
     window.geometry("500x500")
     #window.configure(width=500, height=500)
     window.configure(bg='lightgrey')
-    T = Text(window, bg='lightgrey', height=5, width=5)
 
     login()
     window.mainloop()
+
+def startNewWindow():
+    newWindow.iconify()
+    newWindow.deiconify()
+
+    newWindow.title("Havana Bar")
+    newWindow.geometry("500x500")
+    #window.configure(width=500, height=500)
+    newWindow.configure(bg='lightgrey')
+
+    havana = Label(newWindow, text="Test", font='Arial 17 bold')
+    havana.place(x=150, y=100)
+
+    newWindow.mainloop()
 
 
 def validateLogin(username, password):
@@ -20,6 +35,9 @@ def validateLogin(username, password):
     if username.get() == "admin" and password.get() == "admin":
         messagebox.showinfo("Succes", "Login complete")
         print("login complet")
+        window.destroy()
+        startNewWindow()
+
     else:
         messagebox.showinfo("Error", "Date incorecte")
         print("login esuat")
