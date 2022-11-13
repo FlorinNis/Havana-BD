@@ -108,7 +108,37 @@ def tableProduse(newWindow):
 
     #Buton
     input_button = Button(newWindow, text="Adaugare Produs",command=input_record)
-
     input_button.pack()
+
+    #Select Record
+    def select_record():
+        id_entry.delete(0, END)
+        produs_nume_entry.delete(0, END)
+        produs_pret_entry.delete(0, END)
+        produs_stock_entry.delete(0, END)
+
+        selected = my_table.focus()
+        values = my_table.item(selected,'values')
+        id_entry.insert(0,values[0])
+        produs_nume_entry.insert(0,values[1])
+        produs_pret_entry.insert(0,values[2])
+        produs_stock_entry.insert(0,values[3])
+
+    def update_record():
+        selected = my_table.focus()
+        my_table.item(selected,text="",values=(id_entry.get(), produs_nume_entry.get(), produs_pret_entry.get(),produs_stock_entry.get()))
+
+
+        id_entry.delete(0, END)
+        produs_nume_entry.delete(0, END)
+        produs_pret_entry.delete(0, END)
+        produs_stock_entry.delete(0, END)
+
+    #Butoane
+    select_button = Button(newWindow, text="Selectare Produs", command=select_record)
+    select_button.pack(pady=10)
+
+    refresh_button = Button(newWindow, text="Actualizare Produs",command=update_record)
+    refresh_button.pack(pady=10)
 
     my_table.pack()
