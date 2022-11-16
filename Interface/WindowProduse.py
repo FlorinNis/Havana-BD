@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
 
 
 def startNewWindow(newWindow):
@@ -98,13 +99,23 @@ def tableProduse(newWindow):
     def input_record():
         global count
 
-        my_table.insert(parent='', index='end',iid=count, text='', values =(id_entry.get(), produs_nume_entry.get(), produs_pret_entry.get(), produs_stock_entry.get()))
-        count+=1
+        if id_entry.get() and produs_nume_entry.get():
+            my_table.insert(parent='', index='end',iid=count, text='', values =(id_entry.get(), produs_nume_entry.get(), produs_pret_entry.get(), produs_stock_entry.get()))
+            count+=1
 
-        id_entry.delete(0,END)
-        produs_nume_entry.delete(0,END)
-        produs_pret_entry.delete(0,END)
-        produs_stock_entry.delete(0,END)
+            id_entry.delete(0,END)
+            produs_nume_entry.delete(0,END)
+            produs_pret_entry.delete(0,END)
+            produs_stock_entry.delete(0,END)
+        else:
+            #messagebox.showerror("Error", "Va rog sa introduceti valorile in casete inainte sa adaugati")
+            root = Tk()
+            root.title("Error")
+            label = Label(root, text="Va rog sa introduceti valorile in casete inainte sa adaugati!")
+            label.pack(side="top", fill="both", expand=True, padx=20, pady=20)
+            button = Button(root, text="OK", command=lambda: root.destroy())
+            button.pack(side="bottom", fill="none", expand=True)
+            root.mainloop()
 
     #Buton
     input_button = Button(newWindow, text="Adaugare Produs",command=input_record)
@@ -125,14 +136,24 @@ def tableProduse(newWindow):
         produs_stock_entry.insert(0,values[3])
 
     def update_record():
-        selected = my_table.focus()
-        my_table.item(selected,text="",values=(id_entry.get(), produs_nume_entry.get(), produs_pret_entry.get(),produs_stock_entry.get()))
+        if id_entry.get() and produs_nume_entry.get():
+            selected = my_table.focus()
+            my_table.item(selected,text="",values=(id_entry.get(), produs_nume_entry.get(), produs_pret_entry.get(),produs_stock_entry.get()))
 
 
-        id_entry.delete(0, END)
-        produs_nume_entry.delete(0, END)
-        produs_pret_entry.delete(0, END)
-        produs_stock_entry.delete(0, END)
+            id_entry.delete(0, END)
+            produs_nume_entry.delete(0, END)
+            produs_pret_entry.delete(0, END)
+            produs_stock_entry.delete(0, END)
+        else:
+            #messagebox.showerror("Error", "Nu puteti actualiza produsul! Nu au fost introduse date")
+            root = Tk()
+            root.title("Error")
+            label = Label(root, text="Va rog sa introduceti valorile in casete inainte sa actualizati produsul!")
+            label.pack(side="top", fill="both", expand=True, padx=20, pady=20)
+            button = Button(root, text="OK", command=lambda: root.destroy())
+            button.pack(side="bottom", fill="none", expand=True)
+            root.mainloop()
 
     #Butoane
     select_button = Button(newWindow, text="Selectare Produs", command=select_record)
@@ -140,5 +161,7 @@ def tableProduse(newWindow):
 
     refresh_button = Button(newWindow, text="Actualizare Produs",command=update_record)
     refresh_button.pack(pady=10)
+
+
 
     my_table.pack()
