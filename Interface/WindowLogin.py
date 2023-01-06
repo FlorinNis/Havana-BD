@@ -22,12 +22,13 @@ def loginWindow():
 def validateLogin(username, password):
     print("username entered:", username.get())
     print("password entered:", password.get())
-    #if  password.get() == logig_dict[username.get()] or username.get() == logig_dict[password.get()]:
-    if password.get() == "admin" and username.get()=="admin":
+    #if  password.get() == logig_dict[username.get()]:
+    if password.get() == "admin" and username.get() == "admin":
         messagebox.showinfo("Succes", "Login complete")
         print("login complet")
         window.destroy()
         startNewWindow(newWindow)
+
     else:
         messagebox.showinfo("Error", "Date incorecte")
         print("login esuat")
